@@ -8,9 +8,28 @@
   <script src="js/admin.js" defer></script>
 </head>
 <body>
-  <header><h1>Admin Panel</h1></header>
+  <header>
+    <h1>Admin Panel</h1>
+  </header>
+
   <main>
-    <div id="problems" class="problem-list">Loading...</div>
+    <!-- Login form (shown before login) -->
+    <section id="login-section">
+      <h2>Login</h2>
+      <input type="email" id="login-email" placeholder="Email">
+      <input type="password" id="login-password" placeholder="Password">
+      <button onclick="login()">Login</button>
+    </section>
+
+    <!-- Admin panel (hidden until login success) -->
+    <section id="admin-section" style="display:none;">
+      <div class="toolbar">
+        <button onclick="addProblem()">+ Add Problem</button>
+        <button onclick="logout()">Logout</button>
+      </div>
+
+      <div id="problems" class="problem-list">Loading...</div>
+    </section>
   </main>
 </body>
 </html>
