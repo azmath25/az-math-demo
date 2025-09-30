@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Edit Problem — Az-Math</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="mathjax-loader.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/edit.js" defer></script>
+</head>
+<body>
+  <header class="site-header"><div class="container"><h1 class="brand">Edit Problem</h1></div></header>
+  <main class="container">
+    <form id="edit-form" class="edit-form">
+      <input id="problem-id" type="hidden">
+      <label>Title</label><input id="title" required />
+      <label>Category</label><input id="category" />
+      <label>Statement</label><textarea id="statement" rows="8" required></textarea>
+      <label>Solution</label><textarea id="solution" rows="8"></textarea>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button id="save-btn" type="submit">Save</button>
+        <button id="delete-btn" type="button" class="danger">Delete</button>
+        <button type="button" onclick="location.href='admin.html'">Back</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>
