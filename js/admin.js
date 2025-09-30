@@ -1,14 +1,21 @@
-// admin.js - admin functions: list, add, delete, open modal, logout
+// admin.js - secure admin page
+
 async function api(action, payload={}) {
   const token = localStorage.getItem('az_token');
-  const res = await fetch(CONFIG.SCRIPT_URL, { method: 'POST', body: JSON.stringify(Object.assign({action, token}, payload)) });
+  const res = await fetch(CONFIG.SCRIPT_URL, { 
+    method: 'POST', 
+    body: JSON.stringify(Object.assign({action, token}, payload)) 
+  });
   return res.json();
 }
 
-function escapeHtml(s=''){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escapeHtml(s=''){ 
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); 
+}
 
 function createAdminCard(p){
-  const el = document.createElement('div'); el.className='card';
+  const el = document.createElement('div'); 
+  el.className='card';
   el.innerHTML = `<h3>${escapeHtml(p.title)}</h3>
     <p class="muted">Category: ${escapeHtml(p.category||'')}</p>
     <div class="statement">${p.statement}</div>
@@ -24,13 +31,19 @@ async function loadProblems(){
   container.textContent = 'Loading...';
   try {
     const res = await api('getProblems');
+    if (res.error) { 
+      alert("Session expired, please login again.");
+      logout();
+      return;
+    }
     if (!Array.isArray(res)) { container.textContent = 'Error'; return; }
     container.innerHTML = '';
     res.sort((a,b)=> Number(a.id)-Number(b.id));
     res.forEach(p => container.appendChild(createAdminCard(p)));
     MathJax && MathJax.typeset && MathJax.typeset();
   } catch(e){
-    container.textContent = 'Error loading problems.'; console.error(e);
+    container.textContent = 'Error loading problems.'; 
+    console.error(e);
   }
 }
 
@@ -50,10 +63,7 @@ function openAddForm(){
   document.body.insertAdjacentHTML('beforeend', html);
 }
 
-function closeModal(){
-  const m = document.getElementById('add-modal');
-  if (m) m.remove();
-}
+function closeModal(){ const m = document.getElementById('add-modal'); if (m) m.remove(); }
 
 async function saveNewProblem(){
   const title = document.getElementById('m_title').value.trim();
@@ -63,7 +73,12 @@ async function saveNewProblem(){
   if (!title || !statement) { alert('Title and statement required'); return; }
   try {
     const res = await api('saveProblem', { problem: { title, category, statement, solution } });
-    if (res.error) { alert('Error: ' + res.error); } else { closeModal(); loadProblems(); alert('Saved id: ' + res.id); }
+    if (res.error) { 
+      alert('Error: ' + res.error); 
+      if (res.error.includes("auth")) logout();
+    } else { 
+      closeModal(); loadProblems(); alert('Saved id: ' + res.id); 
+    }
   } catch(e){ alert('Error'); console.error(e); }
 }
 
@@ -71,15 +86,37 @@ async function deleteProblem(id){
   if (!confirm('Delete problem #' + id + '?')) return;
   try {
     const res = await api('deleteProblem', { id });
-    if (res.error) alert('Error: ' + res.error);
+    if (res.error) {
+      alert('Error: ' + res.error);
+      if (res.error.includes("auth")) logout();
+    }
     else loadProblems();
   } catch(e){ alert('Error'); console.error(e); }
 }
 
-function logout(){ localStorage.removeItem('az_token'); location.href='login.html'; }
+function logout(){ 
+  localStorage.removeItem('az_token'); 
+  location.href='login.html'; 
+}
 
-// init
-window.addEventListener('DOMContentLoaded', loadProblems);
+// 🔒 token check on page load
+window.addEventListener('DOMContentLoaded', async () => {
+  const token = localStorage.getItem('az_token');
+  if (!token) {
+    logout();
+    return;
+  }
+  // test token with dummy request
+  const res = await api('getProblems', {});
+  if (res.error) {
+    logout();
+  } else {
+    document.getElementById('admin-section').style.display = 'block';
+    loadProblems();
+  }
+});
+
+// exports
 window.openAddForm = openAddForm;
 window.closeModal = closeModal;
 window.saveNewProblem = saveNewProblem;
