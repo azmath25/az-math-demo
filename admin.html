@@ -22,10 +22,11 @@
 
   <main class="container">
     <section id="login-section" style="display:none;">
-      <!-- login section is optional here because you login via login.html; kept for token-check convenience -->
+      <!-- optional -->
     </section>
 
-    <section id="admin-section">
+    <!-- 🔒 hidden until token verified -->
+    <section id="admin-section" style="display:none;">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <h2>Problems</h2>
         <button class="add-btn" onclick="openAddForm()">+</button>
@@ -33,7 +34,5 @@
       <div id="problems" class="problem-grid">Loading…</div>
     </section>
   </main>
-
-  <!-- Add modal container will be injected by JS -->
 </body>
 </html>
