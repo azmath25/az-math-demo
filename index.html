@@ -1,22 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Math Problems</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Az-Math — Problems</title>
   <link rel="stylesheet" href="style.css">
   <script src="mathjax-loader.js"></script>
   <script src="js/config.js"></script>
   <script src="js/main.js" defer></script>
 </head>
 <body>
-  <header>
-    <h1>Math Problems</h1>
-    <nav>
-      <button onclick="location.href='admin.html'">Login</button>
-    </nav>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Az-Math</h1>
+      <nav>
+        <button class="login-btn" onclick="location.href='login.html'">Admin Login</button>
+      </nav>
+    </div>
   </header>
-  <main>
-    <div id="problems" class="problem-list">Loading...</div>
+
+  <main class="container">
+    <h2>Problems</h2>
+    <div id="problems" class="problem-grid">Loading…</div>
   </main>
 </body>
 </html>
