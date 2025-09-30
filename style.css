@@ -1,206 +1,140 @@
-/* style.css - professional, colorful, responsive */
+/* style.css - clean, minimal, responsive */
 :root {
-  --bg: #f5f8ff;            /* soft bluish background */
-  --card: #ffffff;
-  --muted: #6b7280;
-  --accent: #2563eb;        /* primary blue */
-  --accent-light: #3b82f6;  /* lighter blue */
-  --danger: #ef4444;        /* red */
-  --danger-dark: #dc2626;
-  --radius: 12px;
+  --bg:#f7f8fb;
+  --card:#fff;
+  --muted:#6b7280;
+  --accent:#2563eb;
+  --radius:12px;
+}
+*{box-sizing:border-box}
+body{
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  margin:0;
+  background:var(--bg);
+  color:#0f172a;
+}
+.container{max-width:980px;margin:24px auto;padding:0 16px}
+.site-header{
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(6px);
+  position:sticky;
+  top:0;
+  padding:12px 0;
+  border-bottom:1px solid rgba(15,23,42,0.04);
+}
+.site-header .container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.brand{font-size:20px;margin:0;color:var(--accent)}
+.login-btn,.plain-btn{
+  background:linear-gradient(135deg,var(--accent),#1e40af);
+  color:#fff;
+  border:none;
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
+}
+.plain-btn{
+  background:transparent;
+  color:var(--accent);
+  border:1px solid rgba(15,23,42,0.06);
+}
+.problem-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+  margin-top:18px;
+}
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:0 8px 24px rgba(2,6,23,0.06);
+  border-top:6px solid var(--accent);
+  transition:transform .18s;
+}
+.card:hover{transform:translateY(-6px)}
+.card h3{margin:0 0 8px}
+.card p{margin:0;color:var(--muted)}
+.auth-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:70vh;
+}
+.auth-card{
+  background:var(--card);
+  padding:22px;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(2,6,23,0.06);
+  width:420px;
+}
+input,textarea,button{font-size:1rem}
+input,textarea{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid rgba(15,23,42,0.06);
+  margin:8px 0;
+}
+button.add-btn{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#10b981,#059669);
+  color:#fff;
+  border:none;
+  font-size:32px;
+}
+button.danger{
+  background:#ef4444;
+  color:white;
+  border:none;
+  padding:10px 14px;
+  border-radius:10px;
+}
+.edit-form .form-actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.modal{
+  position:fixed;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  background:var(--card);
+  padding:18px;
+  border-radius:12px;
+  box-shadow:0 12px 40px rgba(2,6,23,0.12);
+  z-index:999;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-  margin: 0;
-  background: var(--bg);
-  color: #0f172a;
-}
-
-/* Container */
-.container {
-  max-width: 980px;
-  margin: 24px auto;
-  padding: 0 16px;
-}
-
-/* Header */
-.site-header {
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
-  backdrop-filter: blur(6px);
-  position: sticky;
-  top: 0;
-  padding: 12px 0;
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.site-header .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.brand {
-  font-size: 20px;
-  margin: 0;
-}
-
+/* brand link */
 .brand a {
-  color: #fff;
+  color: var(--accent);
   text-decoration: none;
 }
-
 .brand a:hover {
-  opacity: 0.85;
   text-decoration: none;
+  opacity: 0.85;
 }
 
-/* Buttons */
-.login-btn,
-.plain-btn {
-  border: none;
-  padding: 8px 14px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s;
+/* solution block */
+.solution {
+  margin-top:12px;
 }
-
-.login-btn {
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
-  color: #fff;
+.solution h4 {
+  margin:0 0 10px;
+  font-weight:600;
+  color:var(--accent);
 }
-
-.plain-btn {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-}
-
-.plain-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-/* Problems grid */
-.problem-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-top: 18px;
-}
-
-/* Cards */
-.card {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 18px;
-  box-shadow: 0 8px 24px rgba(2,6,23,0.08);
-  border-top: 6px solid var(--accent);
-  transition: transform 0.18s, box-shadow 0.18s;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 28px rgba(2,6,23,0.12);
-}
-
-.card h3 {
-  margin: 0 0 8px;
-}
-
-.card p {
-  margin: 0;
-  color: var(--muted);
-}
-
-/* Auth forms */
-.auth-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 70vh;
-}
-
-.auth-card {
-  background: var(--card);
-  padding: 22px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(2,6,23,0.08);
-  width: 420px;
-}
-
-/* Inputs */
-input,
-textarea,
-button {
-  font-size: 1rem;
-}
-
-input,
-textarea {
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid rgba(15,23,42,0.1);
-  margin: 8px 0;
-}
-
-/* Floating add button */
-button.add-btn {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: #fff;
-  border: none;
-  font-size: 32px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
-  transition: transform 0.18s;
-}
-
-button.add-btn:hover {
-  transform: scale(1.08);
-}
-
-/* Danger button */
-button.danger {
-  background: linear-gradient(135deg, var(--danger), var(--danger-dark));
-  color: white;
-  border: none;
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-weight: 500;
-  transition: opacity 0.2s;
-}
-
-button.danger:hover {
-  opacity: 0.9;
-}
-
-/* Edit form */
-.edit-form .form-actions {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-/* Modal */
-.modal {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--card);
-  padding: 18px;
-  border-radius: 12px;
-  box-shadow: 0 12px 40px rgba(2,6,23,0.15);
-  z-index: 999;
+.solution-body {
+  line-height:1.6;
+  color:#1e293b;
 }
