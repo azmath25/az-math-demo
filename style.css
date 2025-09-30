@@ -53,3 +53,13 @@
 .card button:hover {
   background: linear-gradient(135deg, #1e40af, var(--accent));
 }
+.brand a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.brand a:hover {
+  text-decoration: none;
+  opacity: 0.85;
+}
+
