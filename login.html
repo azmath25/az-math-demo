@@ -1,20 +1,27 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Admin Login — Az-Math</title>
   <link rel="stylesheet" href="style.css">
+  <script src="js/config.js"></script>
   <script src="js/login.js" defer></script>
 </head>
 <body>
-  <main>
-    <h2>Login</h2>
-    <form id="login-form">
-      <label>Email: <input type="email" name="email" required></label>
-      <label>Password: <input type="password" name="password" required></label>
-      <button type="submit">Login</button>
-    </form>
-    <div id="login-error"></div>
+  <main class="auth-wrap container">
+    <div class="auth-card">
+      <h2>Admin Login</h2>
+      <label>Email</label>
+      <input id="email" type="email" required />
+      <label>Password</label>
+      <input id="password" type="password" required />
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button onclick="login()">Sign in</button>
+        <button onclick="location.href='index.html'">Cancel</button>
+      </div>
+      <div id="login-msg" class="muted small" style="margin-top:8px"></div>
+    </div>
   </main>
 </body>
 </html>
