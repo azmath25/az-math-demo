@@ -1,7 +1,16 @@
-const SCRIPT_URL = "YOUR_WEBAPP_URL";
-async function loadProfile() {
-  const res = await fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify({ action: "getProfile", token: localStorage.getItem("token") }) });
-  const profile = await res.json();
-  document.getElementById("profile-container").innerHTML = `<h2>${profile.email}</h2><p>Problems added: ${profile.problemsAdded}</p>`;
+// profile.js
+async function api(action, payload={}) {
+  const token = localStorage.getItem('az_token');
+  const res = await fetch(CONFIG.SCRIPT_URL, { method: 'POST', body: JSON.stringify(Object.assign({action, token}, payload)) });
+  return res.json();
 }
-loadProfile();
+
+async function loadProfile(){
+  const res = await api('getProfile');
+  const el = document.getElementById('profile-info');
+  if (res.error) { el.textContent = 'Not logged in.'; return; }
+  el.innerHTML = `<h2>${res.email}</h2>
+    <p>Created: ${res.createdCount}</p>
+    <p>Edited: ${res.editedCount}</p>`;
+}
+window.addEventListener('DOMContentLoaded', loadProfile);
