@@ -1,40 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Panel</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Admin — Az-Math</title>
   <link rel="stylesheet" href="style.css">
   <script src="mathjax-loader.js"></script>
   <script src="js/config.js"></script>
   <script src="js/admin.js" defer></script>
 </head>
 <body>
-  <header>
-    <h1>Admin Panel</h1>
-    <nav>
-      <button onclick="location.href='index.html'">Home</button>
-    </nav>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Az-Math — Admin</h1>
+      <nav>
+        <button id="logout-btn" class="plain-btn" onclick="logout()">Logout</button>
+      </nav>
+    </div>
   </header>
-  <main>
-    <section id="login-section">
-      <h2>Login</h2>
-      <input id="email" type="email" placeholder="Email">
-      <input id="password" type="password" placeholder="Password">
-      <button onclick="login()">Login</button>
-      <div id="login-status"></div>
+
+  <main class="container">
+    <section id="login-section" style="display:none;">
+      <!-- login section is optional here because you login via login.html; kept for token-check convenience -->
     </section>
 
-    <section id="admin-section" style="display:none;">
-      <h2>Problems</h2>
-      <button onclick="loadProblems()">Reload</button>
-      <div id="problems" class="problem-list">Loading...</div>
-
-      <h2>Add Problem</h2>
-      <input id="title" placeholder="Title">
-      <textarea id="statement" placeholder="Problem statement (LaTeX allowed)"></textarea>
-      <textarea id="solution" placeholder="Solution (LaTeX allowed)"></textarea>
-      <button onclick="addProblem()">Add</button>
+    <section id="admin-section">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2>Problems</h2>
+        <button class="add-btn" onclick="openAddForm()">+</button>
+      </div>
+      <div id="problems" class="problem-grid">Loading…</div>
     </section>
   </main>
+
+  <!-- Add modal container will be injected by JS -->
 </body>
 </html>
