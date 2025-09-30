@@ -1,14 +1,24 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Problem</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Problem — Az-Math</title>
   <link rel="stylesheet" href="style.css">
   <script src="mathjax-loader.js"></script>
+  <script src="js/config.js"></script>
   <script src="js/problem.js" defer></script>
 </head>
 <body>
-  <header><h1>Problem Viewer</h1></header>
-  <main id="problem-container">Loading...</main>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Az-Math</h1>
+      <nav><button class="plain-btn" onclick="location.href='index.html'">Back</button></nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <article id="problem-article" class="card">Loading…</article>
+  </main>
 </body>
 </html>
